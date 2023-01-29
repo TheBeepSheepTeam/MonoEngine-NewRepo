@@ -190,6 +190,7 @@ class PlayState extends MusicBeatState
 	public var scoreTxt:FlxText;
 	var timeTxt:FlxText;
 	var scoreTxtTween:FlxTween;
+	var timeTxtTween:FlxTween;
 
 	public static var campaignScore:Int = 0;
 	public static var campaignMisses:Int = 0;
@@ -716,7 +717,7 @@ class PlayState extends MusicBeatState
 		timeBarBG = new FlxSprite(timeTxt.x, timeTxt.y + (timeTxt.height / 4)).loadGraphic(Paths.image('timeBar'));
 		timeBarBG.scrollFactor.set();
 		timeBarBG.alpha = 0;
-		timeBarBG.visible = !ClientPrefs.hideTime;
+		timeBarBG.visible = false;
 		timeBarBG.color = FlxColor.BLACK;
 		add(timeBarBG);
 
@@ -726,7 +727,7 @@ class PlayState extends MusicBeatState
 		timeBar.createFilledBar(0xFF000000, 0xFFFFFFFF);
 		timeBar.numDivisions = 800; //How much lag this causes?? Should i tone it down to idk, 400 or 200?
 		timeBar.alpha = 0;
-		timeBar.visible = !ClientPrefs.hideTime;
+		timeBar.visible = false;
 		add(timeBar);
 		add(timeTxt);
 
@@ -3500,6 +3501,22 @@ class PlayState extends MusicBeatState
 			FlxG.camera.zoom += 0.015;
 			camHUD.zoom += 0.03;
 		}
+
+		if(curBeat % 4 == 0)
+			{
+				if(timeTxtTween != null) 
+				{
+					timeTxtTween.cancel();
+				}
+	
+				timeTxt.scale.x = 1.1;
+				timeTxt.scale.y = 1.1;
+				timeTxtTween = FlxTween.tween(timeTxt.scale, {x: 1, y: 1}, 0.2, {
+					onComplete: function(twn:FlxTween) {
+						timeTxtTween = null;
+					}
+				});
+			}
 
 		if (curBeat % gfSpeed == 0)
 			{
