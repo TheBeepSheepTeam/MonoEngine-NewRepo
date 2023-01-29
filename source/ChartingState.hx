@@ -172,17 +172,33 @@ class ChartingState extends MusicBeatState
 		Conductor.changeBPM(Std.int(bpm));
 	}
 
-	override function openSubState(subState:FlxSubState)
-	{
-		super.openSubState(subState);
-	}
-
 	override function create()
 	{
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("Chart Editor", StringTools.replace(PlayState.SONG.song, '-', ' '));
 		#end
+
+		if (PlayState.SONG != null)
+			_song = PlayState.SONG;
+		else
+		{
+			_song = {
+				song: 'Test',
+				notes: [],
+				bpm: 150.0,
+				needsVoices: true,
+				arrowSkin: '',
+				splashSkin: '',
+				player1: 'bf',
+				player2: 'dad',
+				player3: 'gf',
+				speed: 1,
+				validScore: false
+			};
+			addSection();
+			PlayState.SONG = _song;
+		}
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.scrollFactor.set();
@@ -1423,8 +1439,6 @@ class ChartingState extends MusicBeatState
 		{
 			trace('beat');
 	
-			super.beatHit();
-
 			if (curBeat % 1 == 0)
 				{
 					curBeat % (gfSpeed * 2) == 0 ? {
@@ -1447,6 +1461,8 @@ class ChartingState extends MusicBeatState
 					leftIcon.updateHitbox();
 					rightIcon.updateHitbox();
 				}
+
+			super.beatHit();
 		}
 
 	function recalculateSteps(add:Float = 0):Int

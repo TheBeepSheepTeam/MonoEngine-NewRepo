@@ -8,7 +8,6 @@ import flixel.tweens.FlxTween;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
 import flixel.text.FlxText;
-import flixel.FlxState;
 import flixel.FlxG;
 
 class TapBPMSubState extends FlxSubState

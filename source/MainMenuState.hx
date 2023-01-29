@@ -172,6 +172,14 @@ class MainMenuState extends MusicBeatState
 				MusicBeatState.switchState(new TitleState());
 			}
 
+			#if desktop
+			if (FlxG.keys.pressed.SEVEN)
+			{
+				selectedSomethin = true;
+				MusicBeatState.switchState(new ChartingState());
+			}
+			#end
+
 			if (controls.ACCEPT)
 			{
 				if (optionShit[curSelected] == 'donate')
