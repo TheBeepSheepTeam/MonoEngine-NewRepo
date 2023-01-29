@@ -10,6 +10,8 @@ import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
+import flixel.FlxState;
+import flixel.FlxSubState;
 import flixel.addons.display.FlxGridOverlay;
 import flixel.addons.ui.FlxInputText;
 import flixel.addons.ui.FlxUI9SliceSprite;
@@ -25,9 +27,9 @@ import flixel.input.keyboard.FlxKey;
 import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
 import flixel.system.FlxSound;
-import flixel.FlxState;
-import flixel.FlxSubState;
 import flixel.text.FlxText;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
 import flixel.ui.FlxButton;
 import flixel.ui.FlxSpriteButton;
 import flixel.util.FlxColor;
@@ -204,6 +206,12 @@ class ChartingState extends MusicBeatState
 		add(eventIcon);
 		add(leftIcon);
 		add(rightIcon);
+
+		leftIcon.centerOffsets();
+		rightIcon.centerOffsets();
+
+		leftIcon.updateHitbox();
+		rightIcon.updateHitbox();
 
 		leftIcon.setPosition(GRID_SIZE + 10, -100);
 		rightIcon.setPosition(GRID_SIZE * 5.2, -100);
@@ -1408,6 +1416,38 @@ class ChartingState extends MusicBeatState
 		updateNoteUI();
 		updateGrid();
 	}
+
+	private var gfSpeed:Int = 1;
+
+	override function beatHit()
+		{
+			trace('beat');
+	
+			super.beatHit();
+
+			if (curBeat % 1 == 0)
+				{
+					curBeat % (gfSpeed * 2) == 0 ? {
+						leftIcon.scale.set(1.1, 0.8);
+						rightIcon.scale.set(1.1, 1.3);
+		
+						FlxTween.angle(leftIcon, -15, 0, Conductor.crochet / 1300 * gfSpeed, {ease: FlxEase.quadOut});
+						FlxTween.angle(rightIcon, 15, 0, Conductor.crochet / 1300 * gfSpeed, {ease: FlxEase.quadOut});
+					} : {
+						leftIcon.scale.set(1.1, 1.3);
+						rightIcon.scale.set(1.1, 0.8);
+		
+						FlxTween.angle(rightIcon, -15, 0, Conductor.crochet / 1300 * gfSpeed, {ease: FlxEase.quadOut});
+						FlxTween.angle(leftIcon, 15, 0, Conductor.crochet / 1300 * gfSpeed, {ease: FlxEase.quadOut});
+						}
+		
+					FlxTween.tween(leftIcon, {'scale.x': 1, 'scale.y': 1}, Conductor.crochet / 1250 * gfSpeed, {ease: FlxEase.quadOut});
+					FlxTween.tween(rightIcon, {'scale.x': 1, 'scale.y': 1}, Conductor.crochet / 1250 * gfSpeed, {ease: FlxEase.quadOut});
+		
+					leftIcon.updateHitbox();
+					rightIcon.updateHitbox();
+				}
+		}
 
 	function recalculateSteps(add:Float = 0):Int
 	{
