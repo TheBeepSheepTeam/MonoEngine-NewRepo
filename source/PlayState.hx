@@ -793,8 +793,7 @@ class PlayState extends MusicBeatState
 		healthBarBG.sprTracker = healthBar;
 
 		// Add Kade Engine watermark
-		var kadeEngineWatermark = new FlxText(4, FlxG.height
-			- 4, 0,
+		var kadeEngineWatermark = new FlxText(4, healthBarBG.y + 50, 0,
 			SONG.song
 			+ " "
 			+ (storyDifficulty == 2 ? "Hard" : storyDifficulty == 1 ? "Normal" : "Easy")
