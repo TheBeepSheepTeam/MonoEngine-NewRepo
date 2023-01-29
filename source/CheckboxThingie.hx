@@ -20,12 +20,6 @@ class CheckboxThingie extends FlxSprite
 	}
 
 	override function update(elapsed:Float) {
-		/*switch (animation.curAnim.name) {
-			case "checked":
-				offset.set(17, 70);
-			case "static":
-				offset.set(0, 0);
-		}*/
 
 		if (sprTracker != null)
 			setPosition(sprTracker.x - 130, sprTracker.y + 30);
@@ -40,11 +34,11 @@ class CheckboxThingie extends FlxSprite
 		if(value) {
 			if(animation.curAnim.name != 'checked') {
 				animation.play('checked', true);
-				//offset.set(17, 70);
+				offset.set(17, 70);
 			}
 		} else {
 			animation.play("static");
-			//offset.set(0, 0);
+			offset.set(0, 0);
 		}
 		return value;
 	}

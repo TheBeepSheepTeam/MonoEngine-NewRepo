@@ -2326,7 +2326,7 @@ class PlayState extends MusicBeatState
 				var time:Float = Std.parseFloat(value2);
 				if(Math.isNaN(time) || time <= 0) time = 0.6;
 
-				FlxG.sound.play(Paths.sound('aye'));
+				// FlxG.sound.play(Paths.sound('aye'));
 
 				if(value != 0) {
 					if(dad.curCharacter == 'gf') { //Tutorial GF is actually Dad! The GF is an imposter!! ding ding ding ding ding ding ding, dindinding, end my suffering
