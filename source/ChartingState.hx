@@ -174,11 +174,6 @@ class ChartingState extends MusicBeatState
 
 	override function create()
 	{
-		#if desktop
-		// Updating Discord Rich Presence
-		DiscordClient.changePresence("Chart Editor", StringTools.replace(PlayState.SONG.song, '-', ' '));
-		#end
-
 		if (PlayState.SONG != null)
 			_song = PlayState.SONG;
 		else
@@ -196,9 +191,12 @@ class ChartingState extends MusicBeatState
 				speed: 1,
 				validScore: false
 			};
-			addSection();
-			PlayState.SONG = _song;
 		}
+		
+		#if desktop
+		// Updating Discord Rich Presence
+		DiscordClient.changePresence("Chart Editor", StringTools.replace(PlayState.SONG.song, '-', ' '));
+		#end
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.scrollFactor.set();
@@ -238,25 +236,6 @@ class ChartingState extends MusicBeatState
 
 		nextRenderedSustains = new FlxTypedGroup<FlxSprite>();
 		nextRenderedNotes = new FlxTypedGroup<Note>();
-
-		if (PlayState.SONG != null)
-			_song = PlayState.SONG;
-		else
-		{
-			_song = {
-				song: 'Test',
-				notes: [],
-				bpm: 150.0,
-				needsVoices: true,
-				arrowSkin: '',
-				splashSkin: '',
-				player1: 'bf',
-				player2: 'dad',
-				player3: 'gf',
-				speed: 1,
-				validScore: false
-			};
-		}
 
 		if (curSection >= _song.notes.length)
 			curSection = _song.notes.length - 1;
