@@ -4,6 +4,7 @@ import flixel.util.FlxStringUtil;
 
 using StringTools;
 
+// bruh this is from the oldest versions of fnf, whoops that was a leftover :/
 class ChartParser
 {
 	static public function parse(songName:String, section:Int):Array<Dynamic>

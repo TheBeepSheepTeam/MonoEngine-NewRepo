@@ -1,5 +1,8 @@
 package hstuff;
 
-class HVars {
-    static public var STOP:Int = 0;
+import SScript.*;
+
+class HVars
+{
+	static public var STOP:Int = 0;
 }

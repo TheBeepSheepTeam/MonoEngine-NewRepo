@@ -14,7 +14,7 @@ class CheckboxThingie extends FlxSprite
 		animation.addByPrefix("static", "Check Box unselected", 24, false);
 		animation.addByPrefix("checked", "Check Box selecting animation", 24, false);
 		antialiasing = ClientPrefs.globalAntialiasing;
-		setGraphicSize(Std.int(width * 0.3));
+		setGraphicSize(Std.int(width * 0.2));
 		updateHitbox();
 		set_daValue(checked);
 	}
@@ -22,7 +22,7 @@ class CheckboxThingie extends FlxSprite
 	override function update(elapsed:Float) {
 
 		if (sprTracker != null)
-			setPosition(sprTracker.x - 130, sprTracker.y + 30);
+			setPosition(sprTracker.x - 180, sprTracker.y + 30);
 
 		/*if (sprTracker != null)
 			setPosition(sprTracker.x - 100, sprTracker.y + 5);*/
@@ -34,11 +34,11 @@ class CheckboxThingie extends FlxSprite
 		if(value) {
 			if(animation.curAnim.name != 'checked') {
 				animation.play('checked', true);
-				offset.set(17, 70);
+				// offset.set(17, 0);
 			}
 		} else {
 			animation.play("static");
-			offset.set(0, 0);
+			// offset.set(0, 0);
 		}
 		return value;
 	}

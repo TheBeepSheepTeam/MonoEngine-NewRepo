@@ -2,6 +2,7 @@ package;
 
 import hstuff.HSub;
 import sys.FileSystem;
+import SScript.*;
 import sys.io.File;
 import flixel.FlxCamera;
 import flixel.FlxG;

@@ -1,6 +1,7 @@
 package hstuff;
 
 import flixel.FlxG;
+import SScript.*;
 
 // @:enum abstract FlxColor(String) to String {}
 
@@ -12,9 +13,8 @@ class HBase extends SScript {
         set("importLib", importLib);
         set("Reflect", Reflect);
         set("Type", Type);
-        set("Conductor", Conductor);f
-        set("Settings", Settings);
-        set("HelperFunctions", HelperFunctions);
+        set("Conductor", Conductor);
+        set("ClientPrefs", ClientPrefs);
         parser.line = 1;
         parser.allowTypes = true;
         parser.allowJSON = true;
