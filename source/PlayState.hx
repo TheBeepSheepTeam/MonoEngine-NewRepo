@@ -870,7 +870,7 @@ class PlayState extends MusicBeatState
 		grpNoteSplashes.cameras = [camHUD];
 		notes.cameras = [camHUD];
 		healthBar.cameras = [camHUD];
-	    kadeEngineWatermark.cameras = [camHUD];
+		kadeEngineWatermark.cameras = [camHUD];
 		healthBarBG.cameras = [camHUD];
 		iconP1.cameras = [camHUD];
 		iconP2.cameras = [camHUD];
@@ -1402,10 +1402,6 @@ class PlayState extends MusicBeatState
 		#if sys
 		if (sys.FileSystem.exists(file))
 		{
-		#else
-		if (OpenFlAssets.exists(file))
-		{
-		#end
 			var eventsData:Array<SwagSection> = Song.loadFromJson('events', songName).notes;
 			for (section in eventsData)
 			{
@@ -1419,6 +1415,23 @@ class PlayState extends MusicBeatState
 				}
 			}
 		}
+		#else
+		if (OpenFlAssets.exists(file))
+		{
+			var eventsData:Array<SwagSection> = Song.loadFromJson('events', songName).notes;
+			for (section in eventsData)
+			{
+				for (songNotes in section.sectionNotes)
+				{
+					if (songNotes[1] < 0)
+					{
+						eventNotes.push(songNotes);
+						eventPushed(songNotes);
+					}
+				}
+			}
+		}
+		#end
 
 		for (section in noteData)
 		{

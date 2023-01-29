@@ -2,7 +2,8 @@
 Engine intended to be a fix for the vanilla version's many issues while keeping the casual play aspect of it. Also aiming to be an easier alternative to newbie coders.
 
 ## Credits:
-* CharlesCatYT - Coder
+* CharlesCatYT - Main Coder
+* Monomouse - Coder
 * mello - Assistant Coder
 
 ## Psych Credits
